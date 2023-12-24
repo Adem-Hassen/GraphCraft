@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Graph - Math Project
+{% endblock %}
+
+{% block content %}
+<style>
+    .mb-4{
+      text-align: center;
+    }
+</style>
+    <div class="container mt-5">
+        <h1 class="mb-4" >GraphCraft</h1>
+
+        <form method="post" action="{% url 'plot'%}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="selectedFunction" class="form-label"><b>Select a Function:</b></label>
+
+               
+                <select name="selected_function" id="selectedFunction" class="form-select" aria-label="Select a Function">
+                    <option selected >Select a Function</option>
+                    {% for function in functions %}
+                        
+                        <option value="{{ function.name }}">{{ function.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            
+            <button type="submit" class="btn btn-info mt-3">Display Graph</button>
+        </form>
+
+        <div class="mt-5">
+            {% if graphic %}
+                <h3>Graph Display:</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <img src="data:image/png;base64,{{ graphic }}" class="img-fluid" alt="Function Graph">
+                    </div>
+                </div>
+            {% elif messages%}
+            {%for message in messages%}
+            <div class="alert alert-danger" role="alert">
+                Please Select a Function.
+              </div>
+                {%endfor%}
+            {% endif %}
+        </div>
+
+        
+    </div>
+{% endblock %}

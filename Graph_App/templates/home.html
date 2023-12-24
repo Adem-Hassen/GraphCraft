@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Math Project{% endblock %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome to GraphCraft </h1>
+        <p class="lead">Basic Math Functions Plotter</p>
+        <hr class="my-4">
+
+        <a class="btn btn-info btn-lg" href="{% url 'user_login' %}" role="button">Let's Get Started</a>
+    </div>
+{% endblock %}
